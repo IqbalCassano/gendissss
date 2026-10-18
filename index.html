@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tangkap Cintaku 💗</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@600;700;800&display=swap">
+<style>
+:root{--bg:#ffe3ee;--bg2:#ffc6dc;--card:#fff8fb;--ink:#6b1a40;--soft:#a8527a;--hot:#ff4d8d;--pink:#ff8fb8;--line:#ff4d8d;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#2a1020;--bg2:#3d1630;--card:#401a33;--ink:#ffe3ee;--soft:#f3a9c8;--pink:#ff7aa8}}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;min-height:100vh;background:linear-gradient(170deg,var(--bg),var(--bg2));background-attachment:fixed;color:var(--ink);font-family:'Nunito',system-ui,sans-serif;font-weight:600;font-size:17px;line-height:1.6;overflow-x:hidden}
+.bg{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.bg span{position:absolute;bottom:-40px;opacity:.35;animation:rise linear infinite}
+@keyframes rise{to{transform:translateY(-115vh) rotate(25deg)}}
+.wrap{position:relative;z-index:1;max-width:480px;margin:0 auto;padding:22px 18px 60px}
+h1,h2{font-family:'Pacifico','Nunito',cursive;font-weight:400;margin:0;line-height:1.25;color:var(--hot)}
+h1{font-size:clamp(2.2rem,10vw,3rem)}h2{font-size:1.9rem}
+.screen{display:none;text-align:center}.screen.on{display:block}
+.big{font-size:4.5rem;animation:beat 1.2s infinite}
+@keyframes beat{30%{transform:scale(1.18)}60%{transform:scale(1)}}
+.btn{display:inline-block;border:0;background:var(--hot);color:#fff;font:800 1.15rem 'Nunito',sans-serif;padding:14px 28px;border-radius:99px;cursor:pointer;box-shadow:0 6px 0 #c9296a;margin:18px 0 8px;transition:transform .1s,box-shadow .1s}
+.btn:active{transform:translateY(5px);box-shadow:0 1px 0 #c9296a}
+.btn:focus-visible,.item:focus-visible,#mute:focus-visible{outline:4px solid var(--ink);outline-offset:3px}
+.sub{color:var(--soft)}
+#hud{display:flex;align-items:center;gap:10px;margin:10px 0}
+.bar{flex:1;height:18px;border-radius:99px;background:var(--card);border:3px solid var(--line);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:repeating-linear-gradient(45deg,var(--hot),var(--hot) 10px,var(--pink) 10px,var(--pink) 20px);transition:width .3s}
+#cnt{font-weight:800;color:var(--hot);min-width:3.2em;text-align:right}
+#msg{min-height:5.2em;background:var(--card);border:3px solid var(--line);border-radius:20px;padding:12px 14px;display:flex;align-items:center;justify-content:center;box-shadow:0 5px 0 var(--line)}
+#msg.pop{animation:pop .35s}
+@keyframes pop{0%{transform:scale(.9)}60%{transform:scale(1.05)}}
+#arena{position:relative;height:56vh;min-height:300px;margin-top:16px;border-radius:24px;border:3px dashed var(--line);overflow:hidden;background:rgba(255,255,255,.25);touch-action:manipulation}
+.item{position:absolute;top:-60px;border:0;background:none;font-size:2.6rem;cursor:pointer;line-height:1;padding:6px;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(var(--h)) rotate(var(--r))}}
+.item.hit{animation:none;transform:scale(1.8);opacity:0;transition:.25s}
+.polaroid{background:#fff;padding:14px 14px 18px;border-radius:8px;box-shadow:0 10px 0 var(--pink),0 18px 30px rgba(0,0,0,.2);transform:rotate(-3deg);margin:22px auto 10px;max-width:310px;color:#6b1a40}
+.polaroid img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center 35%;border-radius:4px;display:block}
+.polaroid p{margin:12px 0 0;font-family:'Pacifico',cursive;font-size:1.2rem;line-height:1.35}
+.letter{background:var(--card);border:3px solid var(--line);border-radius:26px;padding:26px 22px;text-align:left;box-shadow:0 8px 0 var(--line);margin-top:18px}
+.letter p{margin:0 0 1.1em}
+.photo{width:62%;max-width:230px;aspect-ratio:3/4;object-fit:cover;object-position:60% 30%;border-radius:50% 50% 46% 46% / 40% 40% 56% 56%;border:6px solid #fff;box-shadow:0 8px 0 var(--pink);display:block;margin:0 auto 22px}
+.sign{font-family:'Pacifico',cursive;color:var(--hot);font-size:1.25rem;text-align:right;margin:0}
+#mute{position:fixed;top:calc(12px + env(safe-area-inset-top,0px));right:12px;z-index:5;width:46px;height:46px;border-radius:50%;border:3px solid var(--line);background:var(--card);font-size:1.3rem;cursor:pointer}
+.rev{opacity:0;transform:translateY(14px);transition:.7s}.rev.in{opacity:1;transform:none}
+.gcard{display:block;width:100%;text-align:left;background:var(--card);border:3px solid var(--line);border-radius:22px;padding:16px 18px;margin:16px 0;box-shadow:0 6px 0 var(--line);cursor:pointer;color:var(--ink);font:inherit;position:relative}
+.gcard b{display:block;font-size:1.2rem;font-weight:800;color:var(--hot)}
+.gcard:active{transform:translateY(4px);box-shadow:0 2px 0 var(--line)}
+.gcard i{position:absolute;right:16px;top:14px;font-style:normal;font-size:1.5rem}
+.gcard:focus-visible,.opt:focus-visible{outline:4px solid var(--ink);outline-offset:3px}
+.btn[disabled]{background:var(--pink);box-shadow:0 6px 0 var(--soft);opacity:.7;cursor:default}
+.opt{display:block;width:100%;text-align:left;background:var(--card);border:3px solid var(--line);border-radius:18px;padding:12px 16px;margin:10px 0;font:inherit;color:var(--ink);cursor:pointer;box-shadow:0 4px 0 var(--line)}
+.opt:disabled{opacity:.55;cursor:default}
+.react{background:var(--hot);color:#fff;border-radius:18px;padding:14px 16px;margin:14px 0;text-align:left;animation:pop .35s}
+#qq{text-align:left;font-size:1.35rem;margin:14px 0}
+@media (prefers-reduced-motion:reduce){.big,.bg span,.item,#msg.pop{animation:none}.rev{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+<div class="bg" id="bg" aria-hidden="true"></div>
+<button id="mute" aria-label="Matikan atau nyalakan musik" class="hide" style="display:none">🔊</button>
+<audio id="bgm" loop preload="auto"></audio>
+
+<div class="wrap">
+
+<section class="screen on" id="s1">
+  <div class="big" aria-hidden="true">💌</div>
+  <h1>inii bukan apa apaa kokk, inii aku buat khusus buatt kamuuu</h1>
+  <p>ADAA SESUATUU YANG MUNGKIN GA SEBERAPAA, TAPII INI SEBAGAI WUJUD BAHWA AKU SELALU SAYANG SAMA KAMUU 🎶</p>
+  <p class="sub">SEMOGAA KAMUU SUKAA YAAAA CILLLL.</p>
+  <button class="btn" id="go">Mulai main</button>
+</section>
+
+<section class="screen" id="s0">
+  <div class="big" aria-hidden="true">🎀</div>
+  <h2>Pilih game kamu</h2>
+  <p class="sub">Mainin dua-duanya, urutannya bebas.</p>
+  <button class="gcard" id="g1"><i id="d1" aria-hidden="true"></i><b>Game 1: ditangkepp yaa lovee dari akuu</b>nantii dapett sesuatuuuu 🎁</button>
+  <button class="gcard" id="g2"><i id="d2" aria-hidden="true"></i><b>Game 2: kuisss </b>tebakk tebakann ajaa sii, semuaa jawabannyaaa benerr kokkk</button>
+  <button class="btn" id="toLetter" disabled>🔒 for you</button>
+</section>
+
+<section class="screen" id="s2">
+  <div id="hud"><div class="bar"><i id="fill"></i></div><span id="cnt">0/12</span></div>
+  <div id="msg" aria-live="polite">tapp tapp lovee yang jatuhh yaaa</div>
+  <div id="arena"></div>
+</section>
+
+<!-- ============ LAYAR HADIAH: muncul setelah menang Game 1. Teks & foto diatur di blok G1 (script) ============ -->
+<section class="screen" id="s3">
+  <div class="big" aria-hidden="true">🎁</div>
+  <h2 id="pt"></h2>
+  <p id="pd"></p>
+  <div class="polaroid"><img id="prizeImg" alt="Foto hadiah"><p id="pc"></p></div>
+  <p class="sub">hadiahnyaaa udaa menetapp di hatii kamuuu. Yuk balik ke menu.</p>
+  <button class="btn" id="back1">Balik ke menu 🏠</button>
+</section>
+
+<section class="screen" id="s4">
+  <img class="photo" id="letterImg" alt="Foto kamu">
+  <h2>pesan buatt kamu, yang paling aku sayanggg</h2>
+  <div class="letter">
+    <p class="rev">haii cantikk Surat ini aku tulis pelan-pelann yaaa, akuuu nggaa minta apa-apa dari kamuuu, aku cuma mau jujurrr.</p>
+    <p class="rev">Pertama, maafin akuu yaa tadiii bercandaku kelewatan dan bikin kamu sedihhh, niatku emang cuma bercanda, tapi sekarang aku ngerti, yang paling penting bukan niatku, tapi gimana perasaan kamuuu, akuuu nyesel udah bikin kamu ngerasa ditolakk gituu padahal kamu manggil aku dengan tuluss yaaa ,maafinn akuu yaa</p>
+    <p class="rev">ada satu hal yang nggak pernah jadi bahan bercandaan buat akuuu, akuu sayangg bangett samaa kamuuu, beneran sayanggg bahkan lebih dari aku sayang sama diriii akuu sendirii, kalauu akuuu harusss milihh antara aku yang seneng atau kamu yang senenggg, aku bakal jauh lebih bahagia kalau yangg bahagiaaa ituu kamuuu.</p>
+    <p class="rev">akuu sayang samaa caramu senyummmuu ituuu, mata kamu yang kayak ikut ketawa tauuu, dan caramu perhatian sama hal-hal kecil yang mungkinnn orang lainn nggak sadarrr. setiappp akuu dengerin cerita kamu, rasanya hariikuu jadi lebih hangat dan lebih ringannn tauu.</p>
+    <p class="rev">aku juga bukan orang yang sempurnaaa. aku masih bisa salahhh, masih suka bercanda di waktuu yang nggak passs. tapii aku mau belajar. akuuu mau jadi orang yang dengerin dulu sebelum ngebela diriii kokk, yang lebih pekaaa, dan yang tau kapan waktunya ngelucu dan kapan waktunya ngertiii.</p>
+    <p class="rev">kamuu nggaa haruss bales inii kokk akuu ngliatt kamuu bahagiaaa dari ini ajaa aku udaa senengg bangettt. kamuuu juga nggak harus maafinnn aku hari iniii, ambil waktu sebanyakkk yang kamu butuhh yaaa, aku bakal sabar nunggu tanpa maksaaaa. kapann punn dimanapunnn akuu bakall selaluu nungguinn kamuu.</p>
+    <p class="rev">makasihh yaa udah jadi kamuuu, dan udah sabar sama cowok yang kadang nyebelin iniii. akuu sayanggg samaa kamuu,akuu cintaa samaa kamuuu, akuuu gamauu kehilangann kamuu, I LOVEE U SO MUCHHH CANTIKKKKU BOCILL KESAYANGANN AKUUUU.</p>
+    <p class="sign rev">darii akuuu yangg senyebelinn ituuuu</p>
+  </div>
+  <button class="btn" id="replay">Balik ke menu 🏠</button>
+</section>
+
+<section class="screen" id="s5">
+  <div id="qh" class="sub"></div>
+  <div class="bar"><i id="qfill"></i></div>
+  <h2 id="qq"></h2>
+  <div id="qo"></div>
+  <div id="qr"></div>
+</section>
+
+</div>
+<script>
+var $=function(s){return document.querySelector(s)};
+// =====================================================
+//  PENGATURAN GAME 1 (TANGKAP CINTA): edit di sini aja
+// =====================================================
+var G1={
+  goal: 12,            // jumlah love yang harus ditangkap
+  spawnMs: 750,        // jeda munculnya love baru (ms). Kecil = lebih banyak
+  fallMin: 4,          // waktu jatuh tercepat (detik). Kecil = lebih cepat
+  fallMax: 7,          // waktu jatuh terlama (detik)
+  emojis: ["💗","💖","💝","🍫","🧸","🌸","😘","💕"],   // benda yang jatuh
+  startMsg: "dii tapp tapp yangg emot lovee yaaa",
+  // kalimat yang muncul tiap kali love ditangkap (urut dari tangkapan ke-1)
+  messages: [
+   "yeyyyy lovenyaa yang pertama masukkk tuuu haruss bisa nangkepp lagii yaa ",
+   "hatiii hatiii lo yaaa nnti jatuhh cintaa samaa akuu",
+   "kamuu kaloo hauss mauu akuu apaa aquaaa ",
+   "kenapaaaa sii gendisss inii cantikk bangetttt",
+    "akuuu gaaa terlaluu baikk buatt kamuuu , tapi akuu bakall selaluu baikk ke orang yang aku sayanggg",
+    "tauu gaa setiapp aku bangunn boboo, yangg pertamaaa akuu carii ituu kamuu tauu", 
+    "Hati-hatiii, yangg kamuu pegangg ini rasa sayangg akuu ke kamuu jangann sampek jatuh yaa",
+    "katanyaa cinta itu buta, tapi buat kamu mataku jelas bangett tauuu",
+    "cieee masih lanjut mainn yaaaa seruu too",
+    "akuu kasii tauu yaa kaloo akuu ituu cintaaa bangettt samaa kamuuu",
+    "ayooo dikittt lagii inii, nntii bakall dapet sesuatuu looo",
+    "siappp siapp yaaaa, jangann kagettt"
+],
+  // teks di layar hadiah (foto 1 diganti lewat file foto1.jpg)
+  prizeTitle: "yeyyy, kamu menanggg !",
+  prizeText: "BAAAAAA kamuu dapett akuuu tauuu (cowoo yang kadang nyebelin hehee) tapiii sayang banget sama kamuu ",
+  prizeCaption: "inii gratisss tiss tanpaa potongg pajakkk",
+  // ---- FILE FOTO & LAGU (ganti nama file di sini, atau timpa file-nya) ----
+  prizePhoto: "foto1.jpg",    // FOTO HADIAH (muncul di layar hadiah)
+  letterPhoto: "foto2.jpg",  // foto di atas surat cinta
+  song: "lagu.mp3"            // lagu latar
+};
+// =====================================================
+var MSGS=G1.messages,EMO=G1.emojis,GOAL=G1.goal,n=0,timer=null;
+$('#pt').textContent=G1.prizeTitle;$('#pd').textContent=G1.prizeText;$('#pc').textContent=G1.prizeCaption;
+var bgm=$('#bgm'),muted=false;
+bgm.src=G1.song;$('#prizeImg').src=G1.prizePhoto;$('#letterImg').src=G1.letterPhoto;
+
+// background hearts
+for(var i=0;i<16;i++){var s=document.createElement('span');s.textContent=['💗','💕','🤍','💖'][i%4];
+ s.style.cssText='left:'+Math.random()*100+'%;font-size:'+(14+Math.random()*22)+'px;animation-duration:'+(12+Math.random()*14)+'s;animation-delay:-'+Math.random()*20+'s';$('#bg').appendChild(s)}
+
+function show(id){document.querySelectorAll('.screen').forEach(function(s){s.classList.toggle('on',s.id===id)});window.scrollTo(0,0)}
+function music(){try{bgm.volume=.7;var p=bgm.play();if(p&&p.catch)p.catch(function(){})}catch(e){}}
+$('#mute').onclick=function(){muted=!muted;bgm.muted=muted;this.textContent=muted?'🔇':'🔊'};
+
+$('#go').onclick=function(){$('#mute').style.display='block';music();menu()};
+function start(){n=0;$('#msg').textContent=G1.startMsg;$('#fill').style.width='0';$('#cnt').textContent='0/'+GOAL;$('#arena').innerHTML='';show('s2');spawn();timer=setInterval(spawn,G1.spawnMs)}
+function spawn(){
+  var a=$('#arena'),b=document.createElement('button');
+  b.className='item';b.textContent=EMO[Math.floor(Math.random()*EMO.length)];
+  b.setAttribute('aria-label','Tangkap love');
+  b.style.left=Math.random()*(a.clientWidth-60)+'px';
+  b.style.animationDuration=(G1.fallMin+Math.random()*(G1.fallMax-G1.fallMin))+'s';
+  b.style.setProperty('--h',(a.clientHeight+80)+'px');
+  b.style.setProperty('--r',(Math.random()*60-30)+'deg');
+  b.onclick=function(){catchIt(b)};
+  b.onanimationend=function(){b.remove()};
+  a.appendChild(b);
+}
+function catchIt(b){
+  if(b.classList.contains('hit'))return;
+  b.classList.add('hit');setTimeout(function(){b.remove()},250);
+  n++;$('#fill').style.width=n/GOAL*100+'%';$('#cnt').textContent=n+'/'+GOAL;
+  var m=$('#msg');m.textContent=MSGS[(n-1)%MSGS.length];m.classList.remove('pop');void m.offsetWidth;m.classList.add('pop');
+  if(n>=GOAL){clearInterval(timer);done1=true;setTimeout(function(){show('s3')},1100)}
+}
+$('#toLetter').onclick=function(){show('s4');setTimeout(function(){document.querySelectorAll('.rev').forEach(function(p,i){setTimeout(function(){p.classList.add('in')},i*700)})},200)};
+$('#replay').onclick=function(){document.querySelectorAll('.rev').forEach(function(p){p.classList.remove('in')});menu()};
+
+var done1=false,done2=false;
+function menu(){
+  clearInterval(timer);
+  $('#d1').textContent=done1?'✅':'';$('#d2').textContent=done2?'✅':'';
+  var b=$('#toLetter'),ok=done1&&done2;b.disabled=!ok;
+  b.textContent=ok?'Buka surat buat kamu 💌':'🔒 Surat dibuka setelah 2 game selesai';
+  show('s0');
+}
+$('#g1').onclick=start;$('#g2').onclick=startQuiz;$('#back1').onclick=menu;
+
+var QZ=[
+{q:"emmm siapaaa orang paling ganteng versi kamuuu?",o:[
+ ["kamu dong","nggaaa salah sih. dan buatt akuu, kamu yang palinggg cantikkk"],
+ ["hmmm siapa yaaa, lagi mikir","Mikirnya jangan lama-lamaaa donggg, uda pastii akuu gasiii"],
+ ["Rahasia","mainn nyaa rahasiaa rahasiaa ann yaaa"]]},
+{q:"kalau aku lagi nyebelin, kamu biasanya gimanaaa",o:[
+ ["diemin dulu","boleee didieminn, akuu selaluu nungguu kamuu dengan sabar, nggak bakal ke mana-manaa kokk"],
+ ["ditabokkk","boleee ajaaa kaloo beraniii , tapii abiss ituu jangann ditabokk lagii sakitt tauuu"],
+ ["diamaafinnn","kamuuu baikk bangett siiii akuu beruntung banget bisa kenal kamu "]]},
+{q:"makanan apa yang paling ampuh nyogok kamu biar senyum lagiii?",o:[
+ ["Coklat","siappp coklat dateng sebelum kamuuu mintaa"],
+ ["Seblak pedes","Level berapaaa? aku siap ngantri demi kamuuu"],
+ ["Es krim","pass bangett sii yang manis ketemu yang maniss"]]},
+{q:"Menurut kamu, aku ini orangnyaa gimanaaa",o:[
+ ["Nyebelin","emangg iyaa siii tapii nyebelinnya sambill sayangg samaa kamuuu"],
+ ["Lucu","kaloo kataa gendiss pipi akuu lucuu, emangg iyaa yaa?"],
+ ["Lumayan lah","lumayann apaa nihhh, lumayann gantengg kahhh "]]},
+{q:"nantii kaloo kitaa ketemuuu mauu ngapainnn?",o:[
+ ["makann","udaa haruss siii, ajakk akuu ke taichann yaaaa"],
+ ["photobook","MAUUU BANGETTTTTT"],
+ ["study date","bolee donggg, kitaaa kerjainn tugas barenggg pusingg juga barengggg"]]},
+{q:"Pertanyaan terakhir: kamuu sayanggg nggaa samaa akuuu?",o:[
+ ["sayanggg","hmmm i knowww"],
+ ["sayangg bangettt","akuu jugaa sayangg bangett samaa gendisss cantikk iniii"],
+ ["duaa duanyaaa","I LOVEEE UU SO MUCHHH CANTIKKKK"]]}
+],qi=0;
+function startQuiz(){qi=0;showQ();show('s5')}
+function showQ(){
+  var q=QZ[qi];
+  $('#qh').textContent='Pertanyaan '+(qi+1)+' dari '+QZ.length;
+  $('#qfill').style.width=(qi/QZ.length*100)+'%';
+  $('#qq').textContent=q.q;$('#qr').innerHTML='';$('#qo').innerHTML='';
+  q.o.forEach(function(o,i){var b=document.createElement('button');b.className='opt';b.textContent=o[0];b.onclick=function(){pick(i)};$('#qo').appendChild(b)});
+}
+function pick(i){
+  document.querySelectorAll('.opt').forEach(function(b){b.disabled=true});
+  var last=qi===QZ.length-1,r=$('#qr');
+  r.innerHTML='<div class="react"></div><button class="btn" id="nx"></button>';
+  r.querySelector('.react').textContent=QZ[qi].o[i][1];
+  var nx=$('#nx');nx.textContent=last?'Lihat hasilnya 💗':'Lanjut 💗';
+  nx.onclick=function(){last?finishQuiz():(qi++,showQ())};
+}
+function finishQuiz(){
+  done2=true;
+  $('#qh').textContent='';$('#qfill').style.width='100%';$('#qq').textContent='Hasil kuis: 100% meleleh 🫠';$('#qo').innerHTML='';
+  $('#qr').innerHTML='<p>Semua jawaban kamu benar, soalnya nggak ada jawaban salah dari kamu. Skor kamu di hatiku tetap sempurna, kayak biasanya 💗</p><button class="btn" id="bk">Balik ke menu 🏠</button>';
+  $('#bk').onclick=menu;
+}
+</script>
+</body>
+</html>
